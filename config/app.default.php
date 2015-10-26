@@ -209,7 +209,7 @@ return [
      */
     'Datasources' => [
         'default' => [
-            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mysql://root:root@192.168.99.100/cakephp')
+            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mysql://my_app:secret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
             // 'className' => 'Cake\Database\Connection',
             // 'driver' => 'Cake\Database\Driver\Mysql',
             // 'persistent' => false,
@@ -252,19 +252,20 @@ return [
          * The test connection is used during the test suite.
          */
         'test' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-            'quoteIdentifiers' => false,
-            'log' => false,
+            'url' => env('CAKEPHP_DATABASE_TEST_URL', 'mysql://my_app:secret@localhost/test_myapp?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
+            // 'className' => 'Cake\Database\Connection',
+            // 'driver' => 'Cake\Database\Driver\Mysql',
+            // 'persistent' => false,
+            // 'host' => 'localhost',
+            // //'port' => 'nonstandard_port_number',
+            // 'username' => 'my_app',
+            // 'password' => 'secret',
+            // 'database' => 'test_myapp',
+            // 'encoding' => 'utf8',
+            // 'timezone' => 'UTC',
+            // 'cacheMetadata' => true,
+            // 'quoteIdentifiers' => false,
+            // 'log' => false,
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         ],
     ],
