@@ -14,7 +14,7 @@ db:
         - ./logs/mysql:/var/log/mysql
     environment:
         MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: cakephp
+        MYSQL_DATABASE: my_app
         MYSQL_USER: user
         MYSQL_PASSWORD: pass
 # If you prefer Postgres
@@ -50,9 +50,9 @@ php:
         - CAKEPHP_CACHE_CORE_URL=File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/
         - CAKEPHP_CACHE_MODEL_URL=File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/
         # If you prefer Postgres
-        #- CAKEPHP_DATABASE_DEFAULT_URL=postgres://user:pass@db/cakephp
-        - CAKEPHP_DATABASE_DEFAULT_URL=mysql://user:pass@db/cakephp
-        - CAKEPHP_DATABASE_TEST_URL=''
+        #- CAKEPHP_DATABASE_DEFAULT_URL=postgres://user:pass@db/my_app
+        - CAKEPHP_DATABASE_DEFAULT_URL=mysql://user:pass@db/my_app
+        - CAKEPHP_DATABASE_TEST_URL=mysql://user:pass@db/test_myapp
         - CAKEPHP_LOG_DEBUG_URL=file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/
         - CAKEPHP_LOG_ERROR_URL=file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/
 nginx:

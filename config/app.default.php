@@ -209,7 +209,7 @@ return [
      */
     'Datasources' => [
         'default' => [
-            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mysql://my_app:secret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
+            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mysql://user:pass@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
             // 'className' => 'Cake\Database\Connection',
             // 'driver' => 'Cake\Database\Driver\Mysql',
             // 'persistent' => false,
@@ -252,7 +252,7 @@ return [
          * The test connection is used during the test suite.
          */
         'test' => [
-            'url' => env('CAKEPHP_DATABASE_TEST_URL', 'mysql://my_app:secret@localhost/test_myapp?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
+            'url' => env('CAKEPHP_DATABASE_TEST_URL', 'mysql://user:pass@localhost/test_myapp?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
             // 'className' => 'Cake\Database\Connection',
             // 'driver' => 'Cake\Database\Driver\Mysql',
             // 'persistent' => false,
