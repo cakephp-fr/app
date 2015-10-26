@@ -9,7 +9,7 @@ return [
      * Development Mode:
      * true: Errors and warnings shown.
      */
-    'debug' => true,
+    'debug' => env('CAKEPHP_DEBUG', false),
 
     /**
      * Configure basic information about the application.
@@ -37,7 +37,7 @@ return [
      */
     'App' => [
         'namespace' => 'App',
-        'encoding' => 'UTF-8',
+        'encoding' => env('CAKEPHP_ENCODING_DEFAULT', 'UTF-8'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -62,7 +62,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => '__SALT__',
+        'salt' => env('CAKEPHP_SECURITY_SALT', '__SALT__'),
     ],
 
     /**
@@ -82,8 +82,9 @@ return [
      */
     'Cache' => [
         'default' => [
-            'className' => 'File',
-            'path' => CACHE,
+            'url' => env('CAKEPHP_CACHE_DEFAULT_URL', 'File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/')
+            // 'className' => 'File',
+            // 'path' => CACHE,
         ],
 
         /**
@@ -91,11 +92,12 @@ return [
          * Translation cache files are stored with this configuration.
          */
         '_cake_core_' => [
-            'className' => 'File',
-            'prefix' => 'myapp_cake_core_',
-            'path' => CACHE . 'persistent/',
-            'serialize' => true,
-            'duration' => '+2 minutes',
+            'url' => env('CAKEPHP_CACHE_CORE_URL', 'File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/')
+            // 'className' => 'File',
+            // 'prefix' => 'myapp_cake_core_',
+            // 'path' => CACHE . 'persistent/',
+            // 'serialize' => true,
+            // 'duration' => '+2 minutes',
         ],
 
         /**
@@ -104,11 +106,12 @@ return [
          * in connections.
          */
         '_cake_model_' => [
-            'className' => 'File',
-            'prefix' => 'myapp_cake_model_',
-            'path' => CACHE . 'models/',
-            'serialize' => true,
-            'duration' => '+2 minutes',
+            'url' => env('CAKEPHP_CACHE_MODEL_URL', 'File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/')
+            // 'className' => 'File',
+            // 'prefix' => 'myapp_cake_model_',
+            // 'path' => CACHE . 'models/',
+            // 'serialize' => true,
+            // 'duration' => '+2 minutes',
         ],
     ],
 
@@ -167,15 +170,16 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => 'Mail',
-            // The following keys are used in SMTP transports
-            'host' => 'localhost',
-            'port' => 25,
-            'timeout' => 30,
-            'username' => 'user',
-            'password' => 'secret',
-            'client' => null,
-            'tls' => null,
+            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mail://username:password@localhost:25?tls=null&client=null&timeout=30')
+            // 'className' => 'Mail',
+            // // The following keys are used in SMTP transports
+            // 'host' => 'localhost',
+            // 'port' => 25,
+            // 'timeout' => 30,
+            // 'username' => 'user',
+            // 'password' => 'secret',
+            // 'client' => null,
+            // 'tls' => null,
         ],
     ],
 
@@ -205,23 +209,24 @@ return [
      */
     'Datasources' => [
         'default' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
+            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mysql://root:root@192.168.99.100/cakephp')
+            // 'className' => 'Cake\Database\Connection',
+            // 'driver' => 'Cake\Database\Driver\Mysql',
+            // 'persistent' => false,
+            // 'host' => 'localhost',
             /**
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
              * the following line and set the port accordingly
              */
             //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-            'log' => false,
+            // 'username' => 'my_app',
+            // 'password' => 'secret',
+            // 'database' => 'my_app',
+            // 'encoding' => 'utf8',
+            // 'timezone' => 'UTC',
+            // 'cacheMetadata' => true,
+            // 'log' => false,
 
             /**
              * Set identifier quoting to true if you are using reserved words or
@@ -231,7 +236,7 @@ return [
              * decreases performance because each query needs to be traversed and
              * manipulated before being executed.
              */
-            'quoteIdentifiers' => false,
+            // 'quoteIdentifiers' => false,
 
             /**
              * During development, if using MySQL < 5.6, uncommenting the
@@ -269,16 +274,19 @@ return [
      */
     'Log' => [
         'debug' => [
-            'className' => 'Cake\Log\Engine\FileLog',
-            'path' => LOGS,
-            'file' => 'debug',
-            'levels' => ['notice', 'info', 'debug'],
+            'url' => env('CAKEPHP_LOG_DEBUG_URL',
+            'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/')
+            // 'className' => 'Cake\Log\Engine\FileLog',
+            // 'path' => LOGS,
+            // 'file' => 'debug',
+            // 'levels' => ['notice', 'info', 'debug'],
         ],
         'error' => [
-            'className' => 'Cake\Log\Engine\FileLog',
-            'path' => LOGS,
-            'file' => 'error',
-            'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+            'url' => env('CAKEPHP_LOG_ERROR_URL', 'file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/')
+            // 'className' => 'Cake\Log\Engine\FileLog',
+            // 'path' => LOGS,
+            // 'file' => 'error',
+            // 'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
     ],
 
