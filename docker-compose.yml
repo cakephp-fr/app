@@ -7,7 +7,7 @@ app:
 db:
     image: mysql:5.6.27
     ports:
-        - 3306:3306
+        - 3306
     volumes_from:
         - app
     volumes:
@@ -33,7 +33,7 @@ db:
 php:
     image: cake17/cakephp:php56-fpm
     expose:
-        - 9000:9000
+        - 9000
     volumes_from:
         - app
     links:
