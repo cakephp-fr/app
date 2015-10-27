@@ -1,11 +1,16 @@
+# This file is for development environment
 app:
-    image: debian:jessie
+    extends:
+        file: common.yml
+        service: app
     volumes:
         - .:/var/www/app
         - ./logs/cakephp:/var/www/app/logs
     tty: true
 db:
-    image: mysql:5.6.27
+    extends:
+        file: common.yml
+        service: db
     ports:
         - 3306
     volumes_from:
@@ -32,19 +37,17 @@ db:
 #         POSTGRES_DB: cakephp
 php:
     image: cake17/cakephp:php56-fpm
+    extends:
+        file: common.yml
+        service: php
     expose:
         - 9000
     volumes_from:
         - app
     links:
         - db
-    working_dir: /var/www/app
     environment:
         - CAKEPHP_DEBUG=1
-        - CAKEPHP_TIMEZONE_DEFAULT=UTC
-        - CAKEPHP_LOCALE_DEFAULT=en_US
-        - CAKEPHP_ENCODING_DEFAULT=UTF-8
-        - CAKEPHP_SECURITY_SALT=wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA
         - CAKEPHP_TRANSPORT_DEFAULT_URL=smtp://user:password@hostname:port?tls=null&client=null&timeout=30
         - CAKEPHP_CACHE_DEFAULT_URL=File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/
         - CAKEPHP_CACHE_CORE_URL=File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/
@@ -56,7 +59,9 @@ php:
         - CAKEPHP_LOG_DEBUG_URL=file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/
         - CAKEPHP_LOG_ERROR_URL=file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/
 nginx:
-    image: cake17/cakephp:nginx
+    extends:
+        file: common.yml
+        service: nginx
     ports:
         # With default config, you can check on which port the server
         # runs by typing 'docker-compose ps' and check the nginx server port

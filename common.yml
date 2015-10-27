@@ -1,0 +1,27 @@
+# This file defines shared configs for production and development
+app:
+    image: debian:jessie
+    tty: true
+db:
+    image: mysql:5.6.27
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: my_app
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+# If you prefer Postgres
+# db:
+#     image: postgres:9.4.5
+#     environment:
+#         POSTGRES_USER: user
+#         POSTGRES_PASSWORD: pass
+#         POSTGRES_DB: cakephp
+php:
+    working_dir: /var/www/app
+    environment:
+        - CAKEPHP_TIMEZONE_DEFAULT=UTC
+        - CAKEPHP_LOCALE_DEFAULT=en_US
+        - CAKEPHP_ENCODING_DEFAULT=UTF-8
+        - CAKEPHP_SECURITY_SALT=wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA
+nginx:
+    image: cake17/cakephp:nginx

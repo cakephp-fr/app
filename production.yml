@@ -1,0 +1,65 @@
+# This file is for a production environment
+db:
+    extends:
+        file: common.yml
+        service: db
+    ports:
+        - 3306:3306
+    # volumes_from:
+    #     - php
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: my_app
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+# If you prefer Postgres
+# db:
+#     image: postgres:9.4.5
+#     ports:
+#         - 5432:5432
+#     volumes_from:
+#         - app
+#     volumes:
+#         - ./logs/postgresql:/var/log/postgresql
+#     environment:
+#         POSTGRES_USER: user
+#         POSTGRES_PASSWORD: pass
+#         POSTGRES_DB: my_app
+php:
+    # build: .
+    image: cake17/cakephp:php56-fpm
+    extends:
+        file: common.yml
+        service: php
+    expose:
+        - 9000:9000
+    volumes:
+        - .:/var/www/app
+    links:
+        - db
+        - redis_server
+    environment:
+        - CAKEPHP_DEBUG=0
+        - CAKEPHP_TRANSPORT_DEFAULT_URL=smtp://user:password@hostname:port?tls=null&client=null&timeout=30
+        - CAKEPHP_CACHE_DEFAULT_URL=redis:///?server=redis_server&prefix=myapp_&timeout=3600
+        - CAKEPHP_CACHE_CORE_URL=redis:///?server=redis_server&prefix=myapp_cake_core_&timeout=3600
+        - CAKEPHP_CACHE_MODEL_URL=redis:///?server=redis_server&prefix=myapp_cake_model_&timeout=3600
+        # If you prefer Postgres
+        #- CAKEPHP_DATABASE_DEFAULT_URL=postgres://user:pass@db/my_app
+        - CAKEPHP_DATABASE_DEFAULT_URL=mysql://user:pass@db/my_app
+        - CAKEPHP_DATABASE_TEST_URL=mysql://user:pass@db/test_myapp
+        - CAKEPHP_LOG_DEBUG_URL=syslog:///?levels[]=notice&levels[]=info&levels[]=debug
+        - CAKEPHP_LOG_ERROR_URL=syslog:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency
+    tty: true
+nginx:
+    extends:
+        file: common.yml
+        service: nginx
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - php
+redis_server:
+    image: redis:3.0.5
