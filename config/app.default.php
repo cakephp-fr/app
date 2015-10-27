@@ -82,7 +82,7 @@ return [
      */
     'Cache' => [
         'default' => [
-            'url' => env('CAKEPHP_CACHE_DEFAULT_URL', 'File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/')
+            'url' => env('CAKEPHP_CACHE_DEFAULT_URL', 'File:///?prefix=myapp_&serialize=true&timeout=3600&path=' . CACHE)
             // 'className' => 'File',
             // 'path' => CACHE,
         ],
@@ -92,7 +92,7 @@ return [
          * Translation cache files are stored with this configuration.
          */
         '_cake_core_' => [
-            'url' => env('CAKEPHP_CACHE_CORE_URL', 'File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/')
+            'url' => env('CAKEPHP_CACHE_CORE_URL', 'File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=' . CACHE . 'persistent/')
             // 'className' => 'File',
             // 'prefix' => 'myapp_cake_core_',
             // 'path' => CACHE . 'persistent/',
@@ -106,7 +106,7 @@ return [
          * in connections.
          */
         '_cake_model_' => [
-            'url' => env('CAKEPHP_CACHE_MODEL_URL', 'File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/')
+            'url' => env('CAKEPHP_CACHE_MODEL_URL', 'File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=' . CACHE . 'models/')
             // 'className' => 'File',
             // 'prefix' => 'myapp_cake_model_',
             // 'path' => CACHE . 'models/',
