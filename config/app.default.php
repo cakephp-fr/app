@@ -275,8 +275,7 @@ return [
      */
     'Log' => [
         'debug' => [
-            'url' => env('CAKEPHP_LOG_DEBUG_URL',
-            'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=' . LOGS)
+            'url' => env('CAKEPHP_LOG_DEBUG_URL', 'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=' . LOGS)
             // 'className' => 'Cake\Log\Engine\FileLog',
             // 'path' => LOGS,
             // 'file' => 'debug',
