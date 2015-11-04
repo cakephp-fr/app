@@ -276,14 +276,14 @@ return [
     'Log' => [
         'debug' => [
             'url' => env('CAKEPHP_LOG_DEBUG_URL',
-            'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/')
+            'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=' . LOGS)
             // 'className' => 'Cake\Log\Engine\FileLog',
             // 'path' => LOGS,
             // 'file' => 'debug',
             // 'levels' => ['notice', 'info', 'debug'],
         ],
         'error' => [
-            'url' => env('CAKEPHP_LOG_ERROR_URL', 'file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/')
+            'url' => env('CAKEPHP_LOG_ERROR_URL', 'file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=' . LOGS)
             // 'className' => 'Cake\Log\Engine\FileLog',
             // 'path' => LOGS,
             // 'file' => 'error',
