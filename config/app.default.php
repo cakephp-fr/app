@@ -9,7 +9,7 @@ return [
      * Development Mode:
      * true: Errors and warnings shown.
      */
-    'debug' => env('CAKEPHP_DEBUG', true),
+    'debug' => env('APP_DEBUG', true),
 
     /**
      * Configure basic information about the application.
@@ -37,7 +37,7 @@ return [
      */
     'App' => [
         'namespace' => 'App',
-        'encoding' => env('CAKEPHP_ENCODING_DEFAULT', 'UTF-8'),
+        'encoding' => env('APP_ENCODING_DEFAULT', 'UTF-8'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -62,7 +62,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('CAKEPHP_SECURITY_SALT', '__SALT__'),
+        'salt' => env('APP_SECURITY_SALT', '__SALT__'),
     ],
 
     /**
@@ -82,7 +82,7 @@ return [
      */
     'Cache' => [
         'default' => [
-            'url' => env('CAKEPHP_CACHE_DEFAULT_URL', 'File:///?prefix=myapp_&serialize=true&timeout=3600&path=' . CACHE)
+            'url' => env('CACHE_DEFAULT_URL', 'File:///?prefix=myapp_&serialize=true&timeout=3600&path=' . CACHE)
             // 'className' => 'File',
             // 'path' => CACHE,
         ],
@@ -92,7 +92,7 @@ return [
          * Translation cache files are stored with this configuration.
          */
         '_cake_core_' => [
-            'url' => env('CAKEPHP_CACHE_CORE_URL', 'File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=' . CACHE . 'persistent/')
+            'url' => env('CACHE_CORE_URL', 'File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=' . CACHE . 'persistent/')
             // 'className' => 'File',
             // 'prefix' => 'myapp_cake_core_',
             // 'path' => CACHE . 'persistent/',
@@ -106,7 +106,7 @@ return [
          * in connections.
          */
         '_cake_model_' => [
-            'url' => env('CAKEPHP_CACHE_MODEL_URL', 'File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=' . CACHE . 'models/')
+            'url' => env('CACHE_MODEL_URL', 'File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=' . CACHE . 'models/')
             // 'className' => 'File',
             // 'prefix' => 'myapp_cake_model_',
             // 'path' => CACHE . 'models/',
@@ -170,7 +170,7 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mail://username:password@localhost:25?tls=null&client=null&timeout=30')
+            'url' => env('MAIL_TRANSPORT_DEFAULT_URL', 'mail://username:password@localhost:25?tls=null&client=null&timeout=30')
             // 'className' => 'Mail',
             // // The following keys are used in SMTP transports
             // 'host' => 'localhost',
@@ -209,7 +209,7 @@ return [
      */
     'Datasources' => [
         'default' => [
-            'url' => env('CAKEPHP_DATABASE_DEFAULT_URL', 'mysql://user:pass@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
+            'url' => env('DATABASE_DEFAULT_URL', 'mysql://user:pass@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
             // 'className' => 'Cake\Database\Connection',
             // 'driver' => 'Cake\Database\Driver\Mysql',
             // 'persistent' => false,
@@ -252,7 +252,7 @@ return [
          * The test connection is used during the test suite.
          */
         'test' => [
-            'url' => env('CAKEPHP_DATABASE_TEST_URL', 'mysql://user:pass@localhost/test_myapp?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
+            'url' => env('DATABASE_TEST_URL', 'mysql://user:pass@localhost/test_myapp?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
             // 'className' => 'Cake\Database\Connection',
             // 'driver' => 'Cake\Database\Driver\Mysql',
             // 'persistent' => false,
@@ -275,14 +275,14 @@ return [
      */
     'Log' => [
         'debug' => [
-            'url' => env('CAKEPHP_LOG_DEBUG_URL', 'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=' . LOGS)
+            'url' => env('LOG_DEBUG_URL', 'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=' . LOGS)
             // 'className' => 'Cake\Log\Engine\FileLog',
             // 'path' => LOGS,
             // 'file' => 'debug',
             // 'levels' => ['notice', 'info', 'debug'],
         ],
         'error' => [
-            'url' => env('CAKEPHP_LOG_ERROR_URL', 'file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=' . LOGS)
+            'url' => env('LOG_ERROR_URL', 'file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=' . LOGS)
             // 'className' => 'Cake\Log\Engine\FileLog',
             // 'path' => LOGS,
             // 'file' => 'error',
