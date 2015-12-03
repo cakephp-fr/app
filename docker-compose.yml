@@ -1,10 +1,9 @@
 # This file is for development environment
 app:
     image: debian:jessie
-    tty: true
     volumes:
-        - .:/var/www/app
-        - ./logs/cakephp:/var/www/app/logs
+        - .:/var/www/html
+        - ./logs/cakephp:/var/www/html/logs
     tty: true
 db:
     image: mysql:5.6.27
@@ -14,6 +13,7 @@ db:
         - app
     volumes:
         - ./logs/mysql:/var/log/mysql
+        - ./svg/mysql:/var/lib/mysql
     environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: my_app
@@ -34,7 +34,7 @@ db:
 #         POSTGRES_DB: cakephp
 php:
     image: cake17/cakephp:php56-fpm
-    working_dir: /var/www/app
+    working_dir: /var/www/html
     expose:
         - 9000
     volumes_from:
