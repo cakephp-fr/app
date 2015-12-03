@@ -32,7 +32,7 @@ db:
 #         POSTGRES_PASSWORD: pass
 #         POSTGRES_DB: cakephp
 php:
-    image: cake17/cakephp:php56-fpm
+    image: cakephpfr/3.x:php56-fpm
     working_dir: /var/www/html
     expose:
         - 9000
@@ -57,7 +57,7 @@ php:
         - LOG_DEBUG_URL=file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/
         - LOG_ERROR_URL=file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/
 nginx:
-    image: cake17/cakephp:nginx
+    image: cakephpfr/3.x:nginx
     ports:
         # With default config, you can check on which port the server
         # runs by typing 'docker-compose ps' and check the nginx server port
