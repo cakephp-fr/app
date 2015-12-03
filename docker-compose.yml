@@ -13,7 +13,6 @@ db:
         - app
     volumes:
         - ./logs/mysql:/var/log/mysql
-        - ./svg/mysql:/var/lib/mysql
     environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: my_app
