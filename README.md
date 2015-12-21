@@ -1,11 +1,12 @@
 # CakePHP Application Skeleton
 
-[![Build Status](https://api.travis-ci.org/cakephp/app.png)](https://travis-ci.org/cakephp/app)
-[![License](https://poser.pugx.org/cakephp/app/license.svg)](https://packagist.org/packages/cakephp/app)
+[![Build Status](https://api.travis-ci.org/cakephp-fr/app.png)](https://travis-ci.org/cakephp-fr/app)
+[![License](https://poser.pugx.org/cakephp/app/license.svg)](https://packagist.org/packages/cakephp-fr/app)
 
-A skeleton for creating applications with [CakePHP](http://cakephp.org) 3.x and Docker-Compose.
+A skeleton for creating applications with [CakePHP](http://cakephp.org) 3.x and [Docker-Compose](https://docs.docker.com/compose).
 
 The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+
 The Dockerfiles can be found [here](https://hub.docker.com/r/cakephpfr/3.x/)
 
 ## Installation
@@ -30,12 +31,12 @@ You should see the welcome page in your webbrowser at the address http://MACHINE
 
 To get the Nginx Port, run `docker-compose ps` to know on which port the containers are running. You'll get something like:
 
-  Name              Command          State               Ports              
-----------------------------------------------------------------------------
-app_app_1     /bin/bash               Up                                     
-app_db_1      /entrypoint.sh mysqld   Up      0.0.0.0:32788->3306/tcp        
-app_nginx_1   nginx -g daemon off;    Up      443/tcp, 0.0.0.0:32789->80/tcp
-app_php_1     php-fpm                 Up      9000/tcp                     
+|  Name       |    Command            | State  |       Ports              
+| ------------|-----------------------|--------|-------------------------------
+| app_app_1   | /bin/bash             | Up     |                               
+| app_db_1    | /entrypoint.sh mysqld | Up     | 0.0.0.0:32788->3306/tcp        
+| app_nginx_1 | nginx -g daemon off;  | Up     | 443/tcp, 0.0.0.0:32789->80/tcp
+| app_php_1   | php-fpm               | Up     | 9000/tcp                     
 
 So you can see that nginx is running on 32789's port in my case.
 
