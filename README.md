@@ -65,5 +65,5 @@ To test your app with phpunit (must be installed with composer):
 
 ## Configuration
 
-Read and edit `config/app.php` and setup the 'Datasources' and any other
+Read and edit `docker-compose.yml` environment variables and any other
 configuration relevant for your application.
