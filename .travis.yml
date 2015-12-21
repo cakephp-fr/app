@@ -1,17 +1,24 @@
 sudo: required
 
+env:
+  DOCKER_COMPOSE_VERSION: 1.4.2
+
 services:
-    - docker
+  - docker
 
 before_install:
-    - docker pull cakephpfr/3.x:php56-fpm
-    - docker pull cakephpfr/3.x:nginx
+  - docker pull cakephpfr/3.x:php56-fpm
+  - docker pull cakephpfr/3.x:nginx
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 script:
-    - docker-compose run -d
-    - docker-compose run php curl -sS https://getcomposer.org/installer | php
-    - docker-compose run php ./composer.phar require 'cakephp/cakephp-codesniffer:2.x'
-    - docker-compose run php ./vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot
+  - docker-compose run -d
+  - docker-compose run php curl -sS https://getcomposer.org/installer | php
+  - docker-compose run php ./composer.phar require 'cakephp/cakephp-codesniffer:2.x'
+  - docker-compose run php ./vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot
 
 notifications:
-    email: false
+  email: false
