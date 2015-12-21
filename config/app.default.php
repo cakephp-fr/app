@@ -90,6 +90,7 @@ return [
         /**
          * Configure the cache used for general framework caching.
          * Translation cache files are stored with this configuration.
+         * Duration will be set to '+1 year' in bootstrap.php when debug = false
          */
         '_cake_core_' => [
             'url' => env('CACHE_CORE_URL', 'File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=' . CACHE . 'persistent/')
@@ -104,6 +105,7 @@ return [
          * Configure the cache for model and datasource caches. This cache
          * configuration is used to store schema descriptions, and table listings
          * in connections.
+         * Duration will be set to '+1 year' in bootstrap.php when debug = false
          */
         '_cake_model_' => [
             'url' => env('CACHE_MODEL_URL', 'File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=' . CACHE . 'models/')
@@ -189,7 +191,7 @@ return [
      * Delivery profiles allow you to predefine various properties about email
      * messages from your application and give the settings a name. This saves
      * duplication across your application and makes maintenance and development
-     * easier. Each profile accepts a number of keys. See `Cake\Network\Email\Email`
+     * easier. Each profile accepts a number of keys. See `Cake\Mailer\Email`
      * for more information.
      */
     'Email' => [
