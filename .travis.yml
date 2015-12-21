@@ -4,7 +4,8 @@ services:
     - docker
 
 before_install:
-    - docker pull cakephpfr/3.x
+    - docker pull cakephpfr/3.x:php56-fpm
+    - docker pull cakephpfr/3.x:nginx
 
 script:
     - docker-compose run -d
