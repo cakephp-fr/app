@@ -6,6 +6,11 @@ env:
 services:
   - docker
 
+language: php
+
+php:
+  - '7.0'
+
 before_install:
   - docker pull mysql:5.6.27
   - docker pull debian:jessie
@@ -18,7 +23,7 @@ before_install:
   - docker-compose up -d
 
 script:
-  - docker-compose run php curl -sS https://getcomposer.org/installer | /usr/local/bin/php
+  - docker-compose run php curl -sS https://getcomposer.org/installer | php
   - docker-compose run php ./composer.phar require 'cakephp/cakephp-codesniffer:2.x'
   - docker-compose run php ./vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot
 
