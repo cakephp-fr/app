@@ -1,16 +1,31 @@
+sudo: required
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.5.2
+
+services:
+  - docker
+
 language: php
 
-sudo: false
-
 php:
-  - 7.0
+  - '7.0'
 
-before_script:
-  - sh -c "composer require 'cakephp/cakephp-codesniffer:dev-master'"
-  - phpenv rehash
+before_install:
+  - docker pull mysql:5.6.27
+  - docker pull debian:jessie
+  - docker pull cakephpfr/3.x:php56-fpm
+  - docker pull cakephpfr/3.x:nginx
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose up -d
 
 script:
-  - sh -c "vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot"
+  - docker-compose run php curl -sS https://getcomposer.org/installer | php
+  - docker-compose run php ./composer.phar require 'cakephp/cakephp-codesniffer:2.x'
+  - docker-compose run php ./vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot
 
 notifications:
   email: false
