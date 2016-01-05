@@ -1,7 +1,7 @@
 # CakePHP Application Skeleton
 
-[![Build Status](https://api.travis-ci.org/cakephp-fr/app.png)](https://travis-ci.org/cakephp-fr/app)
-[![License](https://poser.pugx.org/cakephp/app/license.svg)](https://packagist.org/packages/cakephp-fr/app)
+[![Build Status](https://img.shields.io/travis/cakephp-fr/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp-fr/app)
+[![License](https://img.shields.io/packagist/l/cakephp-fr/app.svg?style=flat-square)](https://packagist.org/packages/cakephp-fr/app)
 
 A skeleton for creating applications with [CakePHP](http://cakephp.org) 3.x and [Docker-Compose](https://docs.docker.com/compose).
 
