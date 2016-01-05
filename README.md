@@ -16,15 +16,8 @@ The Dockerfiles can be found [here](https://hub.docker.com/r/cakephpfr/3.x/)
 3. Run the following.
 
 ```bash
-    # get an empty app
-    git clone git@github.com:cakephp-fr/app.git
-    cd app
-    # the docker app skeleton is on the `docker` branch, so change for it
-    git checkout --track origin/docker
-    # remove history from app (not necessary for your project)
-    rm -rf .git
-    # install all dependencies
-    composer install --prefer-dist
+    # create an empty app, apply some configurations and install dependancies
+    composer create-project --prefer-dist cakephp-fr/app [app_name]
     # run all containers
     docker-compose up -d
 ```
