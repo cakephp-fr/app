@@ -83,8 +83,6 @@ return [
     'Cache' => [
         'default' => [
             'url' => env('CACHE_DEFAULT_URL', 'File:///?prefix=myapp_&serialize=true&timeout=3600&path=' . CACHE)
-            // 'className' => 'File',
-            // 'path' => CACHE,
         ],
 
         /**
@@ -94,11 +92,6 @@ return [
          */
         '_cake_core_' => [
             'url' => env('CACHE_CORE_URL', 'File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=' . CACHE . 'persistent/')
-            // 'className' => 'File',
-            // 'prefix' => 'myapp_cake_core_',
-            // 'path' => CACHE . 'persistent/',
-            // 'serialize' => true,
-            // 'duration' => '+2 minutes',
         ],
 
         /**
@@ -109,11 +102,6 @@ return [
          */
         '_cake_model_' => [
             'url' => env('CACHE_MODEL_URL', 'File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=' . CACHE . 'models/')
-            // 'className' => 'File',
-            // 'prefix' => 'myapp_cake_model_',
-            // 'path' => CACHE . 'models/',
-            // 'serialize' => true,
-            // 'duration' => '+2 minutes',
         ],
     ],
 
@@ -142,6 +130,9 @@ return [
      *   extend one of the listed exceptions will also be skipped for logging.
      *   E.g.:
      *   `'skipLog' => ['Cake\Network\Exception\NotFoundException', 'Cake\Network\Exception\UnauthorizedException']`
+     * - `extraFatalErrorMemory` - int - The number of megabytes to increase
+     *   the memory limit by when a fatal error is encountered. This allows
+     *   breathing room to complete logging or error handling.
      */
     'Error' => [
         'errorLevel' => E_ALL & ~E_DEPRECATED,
@@ -173,15 +164,6 @@ return [
     'EmailTransport' => [
         'default' => [
             'url' => env('MAIL_TRANSPORT_DEFAULT_URL', 'mail://username:password@localhost:25?tls=null&client=null&timeout=30')
-            // 'className' => 'Mail',
-            // // The following keys are used in SMTP transports
-            // 'host' => 'localhost',
-            // 'port' => 25,
-            // 'timeout' => 30,
-            // 'username' => 'user',
-            // 'password' => 'secret',
-            // 'client' => null,
-            // 'tls' => null,
         ],
     ],
 
@@ -212,43 +194,6 @@ return [
     'Datasources' => [
         'default' => [
             'url' => env('DATABASE_DEFAULT_URL', 'mysql://user:pass@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
-            // 'className' => 'Cake\Database\Connection',
-            // 'driver' => 'Cake\Database\Driver\Mysql',
-            // 'persistent' => false,
-            // 'host' => 'localhost',
-            /**
-             * CakePHP will use the default DB port based on the driver selected
-             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
-             * the following line and set the port accordingly
-             */
-            //'port' => 'nonstandard_port_number',
-            // 'username' => 'my_app',
-            // 'password' => 'secret',
-            // 'database' => 'my_app',
-            // 'encoding' => 'utf8',
-            // 'timezone' => 'UTC',
-            // 'flags' => [],
-            // 'cacheMetadata' => true,
-            // 'log' => false,
-
-            /**
-             * Set identifier quoting to true if you are using reserved words or
-             * special characters in your table or column names. Enabling this
-             * setting will result in queries built using the Query Builder having
-             * identifiers quoted when creating SQL. It should be noted that this
-             * decreases performance because each query needs to be traversed and
-             * manipulated before being executed.
-             */
-            // 'quoteIdentifiers' => false,
-
-            /**
-             * During development, if using MySQL < 5.6, uncommenting the
-             * following line could boost the speed at which schema metadata is
-             * fetched from the database. It can also be set directly with the
-             * mysql configuration directive 'innodb_stats_on_metadata = 0'
-             * which is the recommended value in production environments
-             */
-            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         ],
 
         /**
@@ -256,20 +201,6 @@ return [
          */
         'test' => [
             'url' => env('DATABASE_TEST_URL', 'mysql://user:pass@localhost/test_myapp?encoding=utf8&timezone=UTC&cacheMetadata=true&log=false&quoteIdentifiers=false&persistent=false')
-            // 'className' => 'Cake\Database\Connection',
-            // 'driver' => 'Cake\Database\Driver\Mysql',
-            // 'persistent' => false,
-            // 'host' => 'localhost',
-            // //'port' => 'nonstandard_port_number',
-            // 'username' => 'my_app',
-            // 'password' => 'secret',
-            // 'database' => 'test_myapp',
-            // 'encoding' => 'utf8',
-            // 'timezone' => 'UTC',
-            // 'cacheMetadata' => true,
-            // 'quoteIdentifiers' => false,
-            // 'log' => false,
-            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         ],
     ],
 
@@ -279,17 +210,9 @@ return [
     'Log' => [
         'debug' => [
             'url' => env('LOG_DEBUG_URL', 'file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=' . LOGS)
-            // 'className' => 'Cake\Log\Engine\FileLog',
-            // 'path' => LOGS,
-            // 'file' => 'debug',
-            // 'levels' => ['notice', 'info', 'debug'],
         ],
         'error' => [
             'url' => env('LOG_ERROR_URL', 'file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=' . LOGS)
-            // 'className' => 'Cake\Log\Engine\FileLog',
-            // 'path' => LOGS,
-            // 'file' => 'error',
-            // 'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
     ],
 
