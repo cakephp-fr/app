@@ -1,0 +1,71 @@
+# This file is for development environment
+version: '3'
+services:
+  php:
+    build: ./config/docker/php/7.3
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - DEBUG=1
+      - APP_TIMEZONE_DEFAULT=UTC
+      - APP_DEFAULT_LOCALE=en_US
+      - APP_ENCODING=UTF-8
+      - CACHE_DEFAULT_URL=File:///?prefix=myapp_&serialize=true&timeout=3600&path=../tmp/cache/
+      - CACHE_CAKECORE_URL=File:///?prefix=myapp_cake_core_&serialize=true&timeout=3600&path=../tmp/cache/persistent/
+      - CACHE_CAKEMODEL_URL=File:///?prefix=myapp_cake_model_&serialize=true&timeout=3600&path=../tmp/cache/models/
+      - EMAIL_TRANSPORT_DEFAULT_URL=mail://username:password@localhost:25?tls=null&client=null&timeout=30
+      - DATABASE_URL=mysql://user:pass@db/my_app
+      - DATABASE_TEST_URL=mysql://user:pass@dbtest/test_myapp
+      - LOG_DEBUG_URL=file:///?levels[]=notice&levels[]=info&levels[]=debug&file=debug&path=../logs/
+      - LOG_ERROR_URL=file:///?levels[]=warning&levels[]=error&levels[]=critical&levels[]=alert&levels[]=emergency&file=error&path=../logs/
+  db:
+    image: mysql:5.7
+    # image: mysql:8.0
+    # la commande ci-dessous permet d'acceder aux bases via phpmyadmin
+    command: ['--default-authentication-plugin=mysql_native_password']
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: my_app
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    volumes:
+      - db_app:/var/lib/mysql
+      # fichiers sql dans config/sql pour init toutes les databases
+      # - ./config/sql:/docker-entrypoint-initdb.d
+  nginx:
+    build: ./config/docker/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - php
+    volumes:
+      - .:/var/www/html
+      - ./logs/nginx:/var/log/nginx
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      # permet d'avoir le panneau pour se connecter
+      # - PMA_ARBITRARY=1
+      # à commenter si PMA_ARBITRARY pour le panneau pour se connecter est décommenté
+      PMA_USER: user
+      PMA_PASSWORD: pass
+      PMA_HOST: db
+    volumes:
+      - db_app
+  # webpack:
+  #   build: ./config/docker/webpack
+  #   volumes:
+  #     - .:/front:rw,cached
+  #   # on peut changer la commande npm run dev_tdb par exemple en le modifiant ici
+  #   #  cela va surcharger la commande qui se trouve dans le Dockerfile
+  #   # après changement, relancer docker-compose up -d --build
+  #   command: npm run serve
+  #   ports:
+  #     - 8081:8080
+
+volumes:
+  db_app:
